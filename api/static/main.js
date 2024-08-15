@@ -296,6 +296,7 @@ async function searchSchool() {
   var query = document.querySelector("#search_query")
   ttst.innerHTML = ''
   ttgr.innerHTML = ''
+  ttth.innerHTML = ''
   data.innerHTML = '<div class="color-wait">검색 결과 불러오는 중</div>'
   var re = await getAPI(`/searchSchool/${query.value}`)
   re = re['res']
