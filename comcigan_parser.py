@@ -1,4 +1,4 @@
-from urllib import parse
+from urllib import parse, unquote
 import json
 import requests
 import base64
@@ -15,6 +15,7 @@ def search_school(query : str):
   -return: 검색결과(type: list)
   '''
 
+  query = unquote(query)
   URL = _mainURL + _searchPath + parse.quote(query, encoding='euc-kr')
   req = requests.get(URL)
   req.encoding = 'UTF-8'
