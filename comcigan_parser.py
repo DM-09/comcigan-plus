@@ -1,4 +1,5 @@
-from urllib import parse, unquote
+from urllib import parse
+from urllib.parse import unquote
 import json
 import requests
 import base64
