@@ -6,10 +6,8 @@
     <!-- import -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"><link>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
   </head>
-
+  
   <body class='body'>
     <nav class="navbar nav-bg">
       <div class="container-fluid"><span class="navbar-brand h1 nav-color">컴시간+</span></div>
@@ -28,6 +26,55 @@
         <div id='ttth'></div>
       </div>
       <br>
+      <div id='setting'>
+        <!-- Setting Btn -->
+<btn type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#set">
+  설정
+</btn>
+
+<!-- Setting Modal -->
+<div class="modal fade" id="set" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="nav-color el-bg">
+       <div>
+        <br>
+        <h4>시간표 순서</h4>
+          <select class="form-select nav-bg nav-color mt-2" onChange='changeSeq(1, Number(this.value))' style='width: 95%'>
+            <option value="0">없음</option>
+            <option value="1" selected>학생(반) 시간표</option>
+            <option value="2">학년 시간표</option>
+            <option value="3">교사용 시간표</option>
+          </select>
+
+          <select class="form-select nav-bg nav-color mt-2" onChange='changeSeq(2, Number(this.value))' style='width: 95%'>
+            <option value="0">없음</option>
+            <option value="1">학생(반) 시간표</option>
+            <option value="2" selected>학년 시간표</option>
+            <option value="3">교사용 시간표</option>
+          </select>
+
+          <select class="form-select nav-bg nav-color mt-2" onChange='changeSeq(3, Number(this.value))' style='width: 95%'>
+            <option value="0">없음</option>
+            <option value="1" selected>학생(반) 시간표</option>
+            <option value="2">학년 시간표</option>
+            <option value="3" selected>교사용 시간표</option>
+          </select>
+        </div>
+        <br>
+        <div>
+          <h4>상세정보</h4>
+          <div id='detail'>-</div>
+          <br>
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <br>　
+    </div>
+  </div>
+</div>
+      </div>
+      <br>
     </center>
+    <br>
   </body>
 </html>
