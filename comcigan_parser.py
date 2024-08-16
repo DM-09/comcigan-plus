@@ -149,7 +149,7 @@ class TimeTable():
     self.th_data = [] # 교사용 시간표
     self.start_date = '' # 시작일
     self.tdata = [] # 교사 정보
-    self.school_name = school_name
+    self.school_name = unquote(school_name)
 
     res = self.getInfo()
     if res:
