@@ -21,6 +21,7 @@ th,td{
 .t-border { background-color: #F1F1FF }
 .changed { background-color: #FFFF66 }
 .color-wait { color: #a49e9e }
+.el-bg { background-color: white !important }
 
 @media (prefers-color-scheme: dark) {
   .nav-bg { background-color: #212529 !important; }
@@ -45,4 +46,5 @@ th,td{
   }
   .t-border { background-color: #2b2b33 }
   .changed { background-color: #818FB4 }
+  .el-bg { background-color: black !important }
 }
