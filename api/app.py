@@ -15,7 +15,7 @@ def getTable(school):
   return jsonify({"update_date" : tt.update_date, "school_code" : tt.school_code,
                   "region" : tt.region, 'Timetable_st' : tt.data, 'Today_num' : tt.today_num,
                   "date_data" : tt.date_data, "start_date" : tt.start_date, "class_time" : tt.class_time,
-                  "Timetable_th" : tt.th_data, 'Teachers' : tt.tdata})
+                  "Timetable_th" : tt.th_data, 'Teachers' : tt.tdata, 'school_name' : tt.school_name })
 
 @app.route('/searchSchool/<string:query>')
 def search(query):
