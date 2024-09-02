@@ -377,4 +377,4 @@ window.onload = function(){
   if (a == 1) {
     selectSchool(window.localStorage.getItem('scn'))
   }
-}
+} 
