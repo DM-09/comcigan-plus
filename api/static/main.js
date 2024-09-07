@@ -265,6 +265,7 @@ async function selectSchool(name) {
   days = re['Timetable_st'][cur[0]][cur[1]].length - 1
   var q = new Date()
   cur_day = q.getDay()
+  if (cur_day > 5) { cur_day = 1 }
   cur_th = 0
   scn = re.school_name
   class_data = cdd
