@@ -9,7 +9,7 @@ _mainURL = 'http://comci.net:4082'
 _searchPath = '/36179?17384l'
 _timetablePath = '/36179?'
 
-def search_school(query : str):
+def search_school(query : str, weekdata : int):
   '''
   학교 검색
   -param query: 검색어
@@ -70,9 +70,9 @@ class TimeTable():
 
     return tt2
 
-  def getInfo(self):
+  def getInfo(self, weekdata):
     school_code = self.school_code
-    week = 1  # 1이면 이번주
+    week = weekdata  # 1이면 이번주
 
     URL = _mainURL + _timetablePath + str(base64.b64encode(f'73629_{school_code}_0_{week}'.encode('utf-8')))[2:-1]
     req = requests.get(URL)
@@ -134,7 +134,7 @@ class TimeTable():
 
     return [update_date, newData, date_data, class_time, today_num, th_data, data['시작일'], tdata]
 
-  def __init__(self, school_name):
+  def __init__(self, school_name, weekdata=1):
     search = search_school(school_name)
     if not search: raise RuntimeError('해당하는 학교가 없습니다.')
 
@@ -151,7 +151,7 @@ class TimeTable():
     self.tdata = [] # 교사 정보
     self.school_name = unquote(school_name)
 
-    res = self.getInfo()
+    res = self.getInfo(weekdata)
     if res:
       self.update_date = res[0]
       self.data = res[1]
