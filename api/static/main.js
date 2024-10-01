@@ -250,7 +250,7 @@ async function selectSchool(name, weekdata='') {
   week_data = getLocalData('week_data')
   weekdata = '/' + week_data
   
-  if (weekdata == '/') { weekdata = '' }
+  if (weekdata == '/null') { weekdata = '' }
   
   ttst.innerHTML = ''
   ttgr.innerHTML = ''
