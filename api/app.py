@@ -5,7 +5,7 @@ from datetime import *
 
 app = Flask(__name__)
 CORS(app)
-table = TimeTable('학교')
+table = TimeTable('학교',1)
 start = datetime(*map(int, table.start_date.split('-')))
 data = table.data
 
