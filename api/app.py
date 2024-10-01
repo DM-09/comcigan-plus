@@ -11,7 +11,7 @@ data = table.data
 
 @app.route('/getTable/<string:school>/', defaults={'weekdata': 1})
 @app.route('/getTable/<string:school>/<int:weekdata>')
-def getTable(school, weekdata):
+def getTable(school, weekdata=1):
   tt = TimeTable(school,weekdata)
   return jsonify({"update_date" : tt.update_date, "school_code" : tt.school_code,
                   "region" : tt.region, 'Timetable_st' : tt.data, 'Today_num' : tt.today_num,
