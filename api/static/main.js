@@ -17,11 +17,12 @@ var c2 = 2 // 두 번째 시간표
 var c3 = 3 // 세 번째 시간표
 
 var scn = ''
+var week_data = '1'
 
 // 0- 없음, 1-학생 시간표, 2-학년 시간표, 3-교사 시간표
 
 // functions
-function getAPI(URL, t='json') {
+async function getAPI(URL, t='json') {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', URL, true);
@@ -245,11 +246,14 @@ function showTableTh(data, th_num) {
   return html_code
 }
 
-async function selectSchool(name) {
+async function selectSchool(name, weekdata='') {
+  week_data = getLocalData('week_data')
+  weekdata = '/' + week_data
   ttst.innerHTML = ''
   ttgr.innerHTML = ''
+  ttth.innerHTML = ''
   data.innerHTML = `<div class="color-wait">${name} 시간표 불러오는 중</div>`
-  var re = await getAPI(domain+`getTable/${name}`)
+  var re = await getAPI(domain+`getTable/${name}`+weekdata)
   console.log(re)
   var cdd = []
   
@@ -265,10 +269,18 @@ async function selectSchool(name) {
   days = re['Timetable_st'][cur[0]][cur[1]].length - 1
   var q = new Date()
   cur_day = q.getDay()
-  if (cur_day > 5) { cur_day = 1 }
   cur_th = 0
   scn = re.school_name
   class_data = cdd
+  search_query.value = name
+  
+  var date_data = re['date_data']
+  ddata.innerHTML = ''
+  for (var i=0; i < date_data.length; i++) {
+    var s = ''
+    if (Number(week_data) == i+1) { s = 'selected' }
+    ddata.innerHTML += `<option value="/${i+1}"${s}>${date_data[i][1]}</option>`
+  }
   
   if (window.localStorage.getItem('c')) {
     c1 = Number(window.localStorage.getItem('c1'))
@@ -281,7 +293,8 @@ async function selectSchool(name) {
   loadBySeq()
   data.innerHTML = ''
   
-  detail.innerHTML = `학교 명: ${re.school_name} <br> 학교 코드: ${re.school_code}`
+  detail.innerHTML = `학교 명: ${name} <br> 학교 코드: ${re.school_code}`
+  scn = name
 }
 
 function move(n, j=0) {
@@ -328,7 +341,6 @@ function changeSeq(n, v) {
 function loadBySeq() {
   var d = ttData
   var cd = class_data[cur_class]
-  console.log(cd, 'asd')
   var a = {0 : '', 1 : showTableSt(d, cd[0], cd[1]), 2 : showTableGr(d, cd[0], cur_day), 3 : showTableTh(d, cur_th)}
   
   ttst.innerHTML = a[c1]
@@ -336,10 +348,13 @@ function loadBySeq() {
   ttth.innerHTML = a[c3]
 }
 
+function getLocalData(key) { return window.localStorage.getItem(key) }
+
 async function searchSchool() {
   var query = document.querySelector("#search_query")
   ttst.innerHTML = ''
   ttgr.innerHTML = ''
+  ttth.innerHTML = ''
   data.innerHTML = '<div class="color-wait">검색 결과 불러오는 중</div>'
   var re = await getAPI(domain+`searchSchool/${query.value}`)
   re = re['res']
@@ -364,6 +379,13 @@ async function searchSchool() {
   data.innerHTML = html
 }
 
+function set_date(path) {
+  if (path == '/1') { week_data = '1' }
+  else if (path == '/2') { week_data = '2' }
+  window.localStorage.setItem('week_data', week_data)
+  selectSchool(scn, path)
+}
+
 function saveData() {
   var k = ['c1', 'c2', 'c3', 'cur_class', 'cur_day', 'cur_th', 'c', 'scn']
   var v = [c1, c2, c3, cur_class, cur_day, cur_th, 1, scn]
@@ -374,8 +396,7 @@ function saveData() {
 }
 
 window.onload = function(){
-  var a = window.localStorage.getItem('c')
-  if (a == 1) {
-    selectSchool(window.localStorage.getItem('scn'))
+  if (getLocalData('c') == 1) {
+    selectSchool(getLocalData('scn'), getLocalData('week_data'))
   }
-} 
+}
