@@ -9,9 +9,10 @@ table = TimeTable('학교')
 start = datetime(*map(int, table.start_date.split('-')))
 data = table.data
 
-@app.route('/getTable/<string:school>')
-def getTable(school):
-  tt = TimeTable(school)
+@app.route('/getTable/<string:school>/', defaults={'weekdata': 1})
+@app.route('/getTable/<string:school>/<int:weekdata>')
+def getTable(school, weekdata):
+  tt = TimeTable(school,weekdata)
   return jsonify({"update_date" : tt.update_date, "school_code" : tt.school_code,
                   "region" : tt.region, 'Timetable_st' : tt.data, 'Today_num' : tt.today_num,
                   "date_data" : tt.date_data, "start_date" : tt.start_date, "class_time" : tt.class_time,
