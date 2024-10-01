@@ -16,7 +16,7 @@ def search_school(query : str):
   -return: 검색결과(type: list)
   '''
 
-  query = unquote(query)
+  query = unquote(unquote(query))
   URL = _mainURL + _searchPath + parse.quote(query, encoding='euc-kr')
   req = requests.get(URL)
   req.encoding = 'UTF-8'
