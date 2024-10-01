@@ -20,7 +20,7 @@ def getTable(school, weekdata):
 
 @app.route('/searchSchool/<string:query>')
 def search(query):
-  data = search_school(query, 1)
+  data = search_school(query)
   if not data: return jsonify({'res' : '검색결과가 없습니다.'})
   return jsonify({'res' : [(i[1], i[2]) for i in data]})
 
