@@ -140,7 +140,7 @@ class TimeTable():
 
     self.region = {'지역 코드' : search[0][0], '지역' : search[0][1]} # 지역 정보
     self.school_code = search[0][3] # 학교 코드
-    self.school_name = search[0][2] # 학교 이름
+    self.school_name = unquoto(unquoto(search[0][2])) # 학교 이름
     self.update_date = '' # 수정일
     self.data = [] # 학생 시간표
     self.today_num = 0 # 오늘
