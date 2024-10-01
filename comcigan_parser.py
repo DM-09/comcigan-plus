@@ -9,7 +9,7 @@ _mainURL = 'http://comci.net:4082'
 _searchPath = '/36179?17384l'
 _timetablePath = '/36179?'
 
-def search_school(query : str, weekdata : int):
+def search_school(query : str):
   '''
   학교 검색
   -param query: 검색어
