@@ -54,7 +54,7 @@ function showTableSt(data, grade, cn) {
   var html_code =  `<table>
       <tr>
         <td colspan="6">
-        <select class="form-select nav-bg nav-color " onChange='move(Number(this.value), 1)'>
+        <select class="form-select nav-bg nav-color" onChange='move(Number(this.value), 1)'>
           ${a.join("")}
           </select>
           <button class="btn nav-color" type="button" onClick='move(0)'>◀</button> 
