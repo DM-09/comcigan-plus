@@ -22,6 +22,8 @@ th,td{
 .changed { background-color: #FFFF66 }
 .color-wait { color: #a49e9e }
 .el-bg { background-color: white !important }
+.whiteV { background-color: white !important }
+.iV { background-color: #FFFBDA !important }
 
 @media (prefers-color-scheme: dark) {
   .nav-bg { background-color: #212529 !important; }
